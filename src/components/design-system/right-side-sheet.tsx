@@ -19,12 +19,12 @@ interface RightSideSheetProps {
   description?: string;
   children: React.ReactNode;
   triggerButtonVariant?:
-    | "default"
-    | "outline"
-    | "ghost"
-    | "secondary"
-    | "destructive"
-    | "link";
+  | "default"
+  | "outline"
+  | "ghost"
+  | "secondary"
+  | "destructive"
+  | "link";
   submitButtonText: string;
   closeButtonText: string;
   onSubmit?: () => void;

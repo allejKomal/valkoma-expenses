@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RightSideSheet } from "@/components/design-system/right-side-sheet";
@@ -19,9 +20,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { useState } from "react";
 
-function AddExpense() {
+interface AddExpenseProps {
+  expenseToEdit?: Expense | null;
+}
+
+function AddExpense({ expenseToEdit }: AddExpenseProps) {
   const [open, setOpen] = useState(false);
   const {
     register,
@@ -36,6 +40,36 @@ function AddExpense() {
     mode: "onChange",
     resolver: yupResolver(AddExpenseSchema),
   });
+
+  useEffect(() => {
+    if (expenseToEdit) {
+      setOpen(true);
+
+      reset({
+        expenseName: expenseToEdit.expenseName ?? "",
+        amount: expenseToEdit.amount ?? 0,
+        date: expenseToEdit.date
+          ? expenseToEdit.date.toISOString().split("T")[0]
+          : "",
+        note: expenseToEdit.note ?? "",
+        attachments: undefined,
+        isRecurring: !!expenseToEdit.recurring,
+        recurring: expenseToEdit.recurring
+          ? {
+            frequency: expenseToEdit.recurring.frequency,
+            startDate: expenseToEdit.recurring.startDate
+              ? expenseToEdit.recurring.startDate.toISOString().split("T")[0]
+              : "",
+            endDate: expenseToEdit.recurring.endDate
+              ? expenseToEdit.recurring.endDate.toISOString().split("T")[0]
+              : "",
+          }
+          : undefined,
+      });
+    } else {
+      reset(initialFormValues);
+    }
+  }, [expenseToEdit, reset]);
 
   const isRecurring = watch("isRecurring");
 
@@ -65,37 +99,42 @@ function AddExpense() {
       note: data.note ?? undefined,
       attachments: data.attachments
         ? await Promise.all(
-            Array.from(data.attachments).map(async (file) => {
-              return await fileToBase64(file);
-            })
-          )
+          Array.from(data.attachments).map(async (file) => {
+            return await fileToBase64(file);
+          })
+        )
         : undefined,
       recurring:
         data.isRecurring && data.recurring
           ? {
-              frequency: data.recurring.frequency,
-              startDate: new Date(data.recurring.startDate),
-              endDate: data.recurring.endDate
-                ? new Date(data.recurring.endDate)
-                : undefined,
-            }
+            frequency: data.recurring.frequency,
+            startDate: new Date(data.recurring.startDate),
+            endDate: data.recurring.endDate
+              ? new Date(data.recurring.endDate)
+              : undefined,
+          }
           : undefined,
     };
 
-    console.log("Form submitted", expense);
-    toast.success("Expense added successfully");
+    if (expenseToEdit) {
+      console.log("Editing expense", expenseToEdit.id, expense);
+      toast.success("Expense updated successfully");
+    } else {
+      console.log("Adding new expense", expense);
+      toast.success("Expense added successfully");
+    }
   };
 
   return (
     <RightSideSheet
       open={open}
       onOpenChange={setOpen}
-      triggerButtonText="Add Expense"
-      title="Add Expense"
-      submitButtonText="Add"
+      triggerButtonText={expenseToEdit ? "Edit Expense" : "Add Expense"}
+      title={expenseToEdit ? "Edit Expense" : "Add Expense"}
+      submitButtonText={expenseToEdit ? "Save" : "Add"}
       closeButtonText="Cancel"
       onClose={() => {
-        reset();
+        reset(initialFormValues);
       }}
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -134,14 +173,10 @@ function AddExpense() {
           </FieldSet>
         </div>
 
-        {/* Note */}
-
-        {/* Attachments */}
         <FieldSet label="Attachments" error={errors.attachments?.message}>
           <Input type="file" multiple {...register("attachments")} />
         </FieldSet>
 
-        {/* Is Recurring */}
         <FieldSet
           label="Is Recurring"
           error={errors.isRecurring?.message}
@@ -160,7 +195,6 @@ function AddExpense() {
           />
         </FieldSet>
 
-        {/* Recurring Fields (conditionally shown) */}
         {isRecurring && (
           <>
             <FieldSet
