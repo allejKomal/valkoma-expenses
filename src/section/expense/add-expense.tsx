@@ -20,12 +20,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import { PencilIcon } from "lucide-react";
 
 interface AddExpenseProps {
   expenseToEdit?: Expense | null;
+  showIcon?: boolean;
 }
 
-function AddExpense({ expenseToEdit }: AddExpenseProps) {
+function AddExpense({ expenseToEdit, showIcon = false }: AddExpenseProps) {
   const [open, setOpen] = useState(false);
   const {
     register,
@@ -42,9 +44,7 @@ function AddExpense({ expenseToEdit }: AddExpenseProps) {
   });
 
   useEffect(() => {
-    if (expenseToEdit) {
-      setOpen(true);
-
+    if (expenseToEdit && open) {
       reset({
         expenseName: expenseToEdit.expenseName ?? "",
         amount: expenseToEdit.amount ?? 0,
@@ -56,20 +56,27 @@ function AddExpense({ expenseToEdit }: AddExpenseProps) {
         isRecurring: !!expenseToEdit.recurring,
         recurring: expenseToEdit.recurring
           ? {
-            frequency: expenseToEdit.recurring.frequency,
-            startDate: expenseToEdit.recurring.startDate
-              ? expenseToEdit.recurring.startDate.toISOString().split("T")[0]
-              : "",
-            endDate: expenseToEdit.recurring.endDate
-              ? expenseToEdit.recurring.endDate.toISOString().split("T")[0]
-              : "",
-          }
+              frequency: expenseToEdit.recurring.frequency,
+              startDate: expenseToEdit.recurring.startDate
+                ? expenseToEdit.recurring.startDate.toISOString().split("T")[0]
+                : "",
+              endDate: expenseToEdit.recurring.endDate
+                ? expenseToEdit.recurring.endDate.toISOString().split("T")[0]
+                : "",
+            }
           : undefined,
       });
-    } else {
+    }
+  }, [expenseToEdit, open, reset]);
+
+  useEffect(() => {
+    if (!open) {
+      if (expenseToEdit) {
+        return;
+      }
       reset(initialFormValues);
     }
-  }, [expenseToEdit, reset]);
+  }, [open, expenseToEdit, reset]);
 
   const isRecurring = watch("isRecurring");
 
@@ -99,20 +106,20 @@ function AddExpense({ expenseToEdit }: AddExpenseProps) {
       note: data.note ?? undefined,
       attachments: data.attachments
         ? await Promise.all(
-          Array.from(data.attachments).map(async (file) => {
-            return await fileToBase64(file);
-          })
-        )
+            Array.from(data.attachments).map(async (file) => {
+              return await fileToBase64(file);
+            })
+          )
         : undefined,
       recurring:
         data.isRecurring && data.recurring
           ? {
-            frequency: data.recurring.frequency,
-            startDate: new Date(data.recurring.startDate),
-            endDate: data.recurring.endDate
-              ? new Date(data.recurring.endDate)
-              : undefined,
-          }
+              frequency: data.recurring.frequency,
+              startDate: new Date(data.recurring.startDate),
+              endDate: data.recurring.endDate
+                ? new Date(data.recurring.endDate)
+                : undefined,
+            }
           : undefined,
     };
 
@@ -129,12 +136,24 @@ function AddExpense({ expenseToEdit }: AddExpenseProps) {
     <RightSideSheet
       open={open}
       onOpenChange={setOpen}
-      triggerButtonText={expenseToEdit ? "Edit Expense" : "Add Expense"}
+      triggerButtonVariant={showIcon ? "outline" : "default"}
+      triggerButtonText={
+        showIcon ? (
+          <PencilIcon className="w-4 h-4" />
+        ) : expenseToEdit ? (
+          "Edit Expense"
+        ) : (
+          "Add Expense"
+        )
+      }
+      size={showIcon ? "icon" : "default"}
       title={expenseToEdit ? "Edit Expense" : "Add Expense"}
       submitButtonText={expenseToEdit ? "Save" : "Add"}
       closeButtonText="Cancel"
       onClose={() => {
-        reset(initialFormValues);
+        if (!expenseToEdit) {
+          reset(initialFormValues);
+        }
       }}
       onSubmit={handleSubmit(onSubmit)}
     >

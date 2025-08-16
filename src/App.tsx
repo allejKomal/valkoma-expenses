@@ -1,10 +1,10 @@
 import "./App.css";
-import AddExpense from "./pages/add-expense";
+import ExpenseList from "./pages/expense-list";
 
 function App() {
   return (
-    <div className="flex flex-wrap items-center gap-2 md:flex-row">
-      <AddExpense />
+    <div className="">
+      <ExpenseList />
     </div>
   );
 }

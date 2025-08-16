@@ -9,29 +9,31 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 import { useEffect } from "react";
 
 interface RightSideSheetProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  triggerButtonText: string;
+  triggerButtonText: string | React.ReactNode;
   title: string;
   description?: string;
   children: React.ReactNode;
   triggerButtonVariant?:
-  | "default"
-  | "outline"
-  | "ghost"
-  | "secondary"
-  | "destructive"
-  | "link";
+    | "default"
+    | "outline"
+    | "ghost"
+    | "secondary"
+    | "destructive"
+    | "link";
   submitButtonText: string;
   closeButtonText: string;
   onSubmit?: () => void;
   onClose?: () => void;
+  size?: "sm" | "default" | "icon" | "lg";
 }
 
-export const RightSideSheet: React.FC<RightSideSheetProps> = ({
+export const RightSideSheet = ({
   open,
   onOpenChange,
   triggerButtonText,
@@ -43,7 +45,8 @@ export const RightSideSheet: React.FC<RightSideSheetProps> = ({
   closeButtonText,
   onSubmit,
   onClose,
-}) => {
+  size = "default",
+}: RightSideSheetProps) => {
   useEffect(() => {
     if (open) {
       onClose?.();
@@ -54,7 +57,13 @@ export const RightSideSheet: React.FC<RightSideSheetProps> = ({
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
-        <Button variant={triggerButtonVariant}>{triggerButtonText}</Button>
+        <Button
+          variant={triggerButtonVariant}
+          size={size}
+          className={cn(size !== "icon" && "h-7")}
+        >
+          {triggerButtonText}
+        </Button>
       </SheetTrigger>
       <SheetContent className="min-w-[500px]">
         <SheetHeader>
