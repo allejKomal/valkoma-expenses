@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { PencilIcon } from "lucide-react";
+import { categories } from "@/dummy-data/categories-list";
 
 interface AddExpenseProps {
   expenseToEdit?: Expense | null;
@@ -54,6 +55,7 @@ function AddExpense({ expenseToEdit, showIcon = false }: AddExpenseProps) {
         note: expenseToEdit.note ?? "",
         attachments: undefined,
         isRecurring: !!expenseToEdit.recurring,
+        categoryId: expenseToEdit.categoryId ?? "",
         recurring: expenseToEdit.recurring
           ? {
               frequency: expenseToEdit.recurring.frequency,
@@ -104,6 +106,7 @@ function AddExpense({ expenseToEdit, showIcon = false }: AddExpenseProps) {
       amount: data.amount,
       date: new Date(data.date),
       note: data.note ?? undefined,
+      categoryId: data.categoryId,
       attachments: data.attachments
         ? await Promise.all(
             Array.from(data.attachments).map(async (file) => {
@@ -159,17 +162,49 @@ function AddExpense({ expenseToEdit, showIcon = false }: AddExpenseProps) {
     >
       <form className="flex flex-col gap-4">
         {/* Expense Name */}
-        <FieldSet
-          label="Expense Name"
-          error={errors.expenseName?.message}
-          isRequired
-        >
-          <Input
-            type="text"
-            placeholder="Enter expense name"
-            {...register("expenseName")}
-          />
-        </FieldSet>
+        <div className="flex gap-2 w-full">
+          <FieldSet
+            label="Expense Name"
+            error={errors.expenseName?.message}
+            isRequired
+            className="w-full"
+          >
+            <Input
+              type="text"
+              placeholder="Enter expense name"
+              {...register("expenseName")}
+            />
+          </FieldSet>
+          <FieldSet
+            label="Category"
+            error={errors.categoryId?.message}
+            isRequired
+          >
+            <Controller
+              name="categoryId"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select category" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-[200px] overflow-y-auto">
+                    {categories.map((category) => (
+                      <SelectItem key={category.id} value={category.id}>
+                        {/* {category.icon && <Icon className="w-4 h-4" />} */}
+                        {category.categoryName}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </FieldSet>
+        </div>
 
         <div className="flex gap-2 w-full">
           <FieldSet

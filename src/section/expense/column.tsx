@@ -1,61 +1,70 @@
-import type { Expense } from "@/models/expense.model";
-import { Badge } from "@/components/ui/badge";
 import type { ColumnDef } from "@tanstack/react-table";
-import { formatter } from "@/utils/date";
-import AddExpense from "@/section/expense/add-expense";
-import DeleteExpense from "./delete-expense";
+import type { Expense } from "@/models/expense.model";
+import { DataTableColumnHeader } from "@/components/design-system/table-column-header";
 import { categories } from "@/dummy-data/categories-list";
+import AddExpense from "./add-expense";
+import DeleteExpense from "./delete-expense";
+import { formatter } from "@/utils/date";
+import { Badge } from "@/components/ui/badge";
 
-export const columns: ColumnDef<Expense>[] = [
+export type ExtendedColumnDef<TData, TValue = unknown> = ColumnDef<
+  TData,
+  TValue
+> & {
+  headerAlign?: "left" | "center" | "right";
+  cellAlign?: "left" | "center" | "right";
+};
+
+export const expenseColumns: ExtendedColumnDef<Expense>[] = [
   {
     accessorKey: "expenseName",
-    header: () => (
-      <div className="w-full flex justify-start">
-        <span>Expense Name</span>
-      </div>
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Expense Name" />
     ),
     cell: ({ getValue }) => (
       <div className="w-full flex justify-start">
-        <span className="text-gray-900 font-medium text-left w-full">
+        <span className="font-medium text-left w-full">
           {getValue<string>()}
         </span>
       </div>
     ),
+    enableSorting: false,
+    size: 250,
   },
   {
     accessorKey: "amount",
-    header: () => (
-      <div className="w-full flex justify-center">
-        <span>Amount</span>
-      </div>
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Amount" />
     ),
     cell: ({ getValue }) => (
       <div className="w-full flex justify-center">
-        <span className="text-right font-mono text-gray-900">
+        <span className="text-right font-mono">
           ${getValue<number>().toFixed(2)}
         </span>
       </div>
     ),
+    enableSorting: false,
+    headerAlign: "center",
+    size: 90,
   },
   {
     accessorKey: "date",
-    header: () => (
-      <div className="w-full flex justify-center">
-        <span>Date</span>
-      </div>
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Date" />
     ),
     cell: ({ getValue }) => (
       <div className="w-full flex justify-center">
         <span>{formatter.format(getValue<Date>())}</span>
       </div>
     ),
+    enableSorting: false,
+    headerAlign: "center",
+    size: 120,
   },
   {
     accessorKey: "categoryId",
-    header: () => (
-      <div className="w-full flex justify-center">
-        <span>Category</span>
-      </div>
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Category" />
     ),
     cell: ({ row }) => {
       const categoryId = row.original.categoryId;
@@ -68,27 +77,25 @@ export const columns: ColumnDef<Expense>[] = [
         </div>
       );
     },
+    enableSorting: false,
+    headerAlign: "center",
   },
   {
     accessorKey: "note",
-    header: () => (
-      <div className="w-full flex justify-start">
-        <span>Note</span>
-      </div>
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Note" />
     ),
     cell: ({ getValue }) => (
       <div className="w-full flex justify-start">
         <span className="justify-start">{getValue<string>() || ""}</span>
       </div>
     ),
+    enableSorting: false,
+    size: 200,
   },
   {
     accessorKey: "attachments",
-    header: () => (
-      <div className="w-full flex justify-center">
-        <span>Attachments</span>
-      </div>
-    ),
+    header: "Attachments",
     cell: ({ row }) => {
       const attachments = row.original.attachments;
       return (
@@ -99,15 +106,14 @@ export const columns: ColumnDef<Expense>[] = [
         </div>
       );
     },
+    enableSorting: false,
+    headerAlign: "center",
+    size: 90,
   },
   {
     accessorFn: (row) => (row.recurring ? row.recurring.frequency : ""),
     id: "recurring",
-    header: () => (
-      <div className="w-full flex justify-center">
-        <span>Recurring</span>
-      </div>
-    ),
+    header: "Recurring",
     cell: ({ row }) => {
       const recurring = row.original.recurring;
       return (
@@ -120,13 +126,15 @@ export const columns: ColumnDef<Expense>[] = [
         </div>
       );
     },
+    enableSorting: false,
+    headerAlign: "center",
+    cellAlign: "center",
+    size: 100,
   },
   {
     id: "actions",
-    header: () => (
-      <div className="w-full flex justify-center">
-        <span>Actions</span>
-      </div>
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Actions" />
     ),
     cell: ({ row }) => {
       return (
@@ -136,5 +144,8 @@ export const columns: ColumnDef<Expense>[] = [
         </div>
       );
     },
+    headerAlign: "center",
+    cellAlign: "center",
+    size: 70,
   },
 ];

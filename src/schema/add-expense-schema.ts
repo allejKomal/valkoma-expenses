@@ -11,6 +11,7 @@ export const AddExpenseSchema: yup.ObjectSchema<AddExpenseFormData> =
     date: yup.string().required("Date is required"),
     note: yup.string().nullable().optional(), // Explicitly optional and nullable
     attachments: yup.mixed<FileList>().nullable().optional(),
+    categoryId: yup.string().required("Category is required"),
     isRecurring: yup.boolean().default(false),
     recurring: yup
       .object({
@@ -58,6 +59,7 @@ export interface AddExpenseFormData {
   note?: string | null;
   attachments?: FileList | null;
   isRecurring: boolean;
+  categoryId: string;
   recurring?: {
     frequency: "daily" | "weekly" | "monthly" | "yearly";
     startDate: string;
@@ -73,5 +75,6 @@ export const initialFormValues: AddExpenseFormData = {
   note: null, // Align with nullable optional note
   attachments: null,
   isRecurring: false,
+  categoryId: "",
   recurring: null, // Start with null to match optional recurring
 };

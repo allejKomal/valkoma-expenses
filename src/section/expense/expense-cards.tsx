@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import type { Expense } from "@/models/expense.model";
 import { formatter } from "@/utils/date";
-import AddExpense from "../../section/expense/add-expense";
+import AddExpense from "./add-expense";
 import DeleteExpense from "@/section/expense/delete-expense";
 import { categories } from "@/dummy-data/categories-list";
 
@@ -13,7 +13,7 @@ export default function ExpenseCards({ data }: ExpenseCardsProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {data.map((expense) => (
-        <div key={expense.id} className="border rounded-md w-full p-4 bg-white">
+        <div key={expense.id} className="border rounded-md w-full p-4">
           {/* Image with overlay (no padding inside image box) */}
           <div className="relative h-40 rounded-md overflow-hidden">
             <img

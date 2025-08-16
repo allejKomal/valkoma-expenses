@@ -1,12 +1,13 @@
 import { expensesList } from "@/dummy-data/expenses-list";
 import { ButtonGroup } from "valkoma-package/design-system";
 import { useState } from "react";
-import { GridIcon, TimerIcon, Table2Icon } from "lucide-react";
+import { GridIcon, TimerIcon, Table2Icon, Coins } from "lucide-react";
 import { cn } from "@/lib/utils";
 import AddExpense from "../section/expense/add-expense";
-import { ExpenseTable } from "./expense-list/expense-table";
-import ExpenseCards from "./expense-list/expense-cards";
-import TimelineExpenseList from "./expense-list/timeline-expense-list";
+import { ExpenseTable } from "../section/expense/expense-table";
+import ExpenseCards from "../section/expense/expense-cards";
+import TimelineExpenseList from "../section/expense/timeline-expense-list";
+import Navbar from "@/components/design-system/nav-bar";
 
 type view = "table" | "cards" | "timeline";
 
@@ -23,9 +24,8 @@ export default function ExpenseList() {
   ];
 
   return (
-    <div className="w-full flex flex-col gap-4  h-screen p-10 ">
-      <div className="flex justify-between">
-        <span className="text-2xl font-bold">Expense List</span>
+    <div className="w-full flex flex-col gap-4  h-full">
+      <Navbar title="Expense List" icon={<Coins className="w-4 h-4" />}>
         <div className="flex items-center gap-2">
           <AddExpense />
           <ButtonGroup
@@ -43,7 +43,7 @@ export default function ExpenseList() {
             )}
           />
         </div>
-      </div>
+      </Navbar>
       <div className="p-4 h-full overflow-y-auto">
         {activeView === "table" && <ExpenseTable data={expensesList} />}
         {activeView === "cards" && <ExpenseCards data={expensesList} />}

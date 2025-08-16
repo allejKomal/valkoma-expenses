@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import type { Expense } from "@/models/expense.model";
-import AddExpense from "../../section/expense/add-expense";
+import AddExpense from "./add-expense";
 import DeleteExpense from "@/section/expense/delete-expense";
 import { categories } from "@/dummy-data/categories-list";
 

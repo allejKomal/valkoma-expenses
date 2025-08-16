@@ -20,7 +20,7 @@ export const FieldSet: React.FC<FieldSetProps> = ({
   return (
     <div className={cn("flex flex-col gap-1", className)}>
       <div className="flex flex-col gap-1">
-        <Label className="flex flex-col gap-3 items-start">
+        <Label className="flex flex-col gap-2 items-start">
           <span>
             {label}
             {isRequired && <span className="text-destructive ml-1">*</span>}

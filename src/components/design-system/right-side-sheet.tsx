@@ -70,7 +70,9 @@ export const RightSideSheet = ({
           <SheetTitle>{title}</SheetTitle>
           {description && <SheetDescription>{description}</SheetDescription>}
         </SheetHeader>
-        <div className="grid flex-1 auto-rows-min gap-6 px-4">{children}</div>
+        <div className="grid flex-1 auto-rows-min gap-6 px-4 h-full overflow-y-auto">
+          {children}
+        </div>
         <SheetFooter className="flex-row">
           <Button onClick={onSubmit} className="flex-1">
             {submitButtonText}
