@@ -3,6 +3,7 @@ import type { Expense } from "@/models/expense.model";
 import { formatter } from "@/utils/date";
 import AddExpense from "../../section/expense/add-expense";
 import DeleteExpense from "@/section/expense/delete-expense";
+import { categories } from "@/dummy-data/categories-list";
 
 interface ExpenseCardsProps {
   data: Expense[];
@@ -33,9 +34,15 @@ export default function ExpenseCards({ data }: ExpenseCardsProps) {
           </div>
 
           {/* Content below the image (like date) */}
-          <div className="pt-2 px-2 flex gap-2 justify-end">
-            <Badge variant="secondary">{formatter.format(expense.date)}</Badge>
-            {expense.note && <Badge variant="secondary">{expense.note}</Badge>}
+          <div className="pt-2 px-2 flex gap-2 justify-end flex-wrap">
+            <Badge variant="outline">{formatter.format(expense.date)}</Badge>
+            {expense.note && <Badge variant="outline">{expense.note}</Badge>}
+            <Badge variant="secondary">
+              {
+                categories.find((c) => c.id === expense.categoryId)
+                  ?.categoryName
+              }
+            </Badge>
             <Badge>$ {expense.amount.toFixed(2)}</Badge>
           </div>
         </div>

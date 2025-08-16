@@ -4,6 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { formatter } from "@/utils/date";
 import AddExpense from "@/section/expense/add-expense";
 import DeleteExpense from "./delete-expense";
+import { categories } from "@/dummy-data/categories-list";
 
 export const columns: ColumnDef<Expense>[] = [
   {
@@ -48,6 +49,25 @@ export const columns: ColumnDef<Expense>[] = [
         <span>{formatter.format(getValue<Date>())}</span>
       </div>
     ),
+  },
+  {
+    accessorKey: "categoryId",
+    header: () => (
+      <div className="w-full flex justify-center">
+        <span>Category</span>
+      </div>
+    ),
+    cell: ({ row }) => {
+      const categoryId = row.original.categoryId;
+      const category = categories.find((c) => c.id === categoryId);
+      return (
+        <div className="flex justify-center">
+          {category && (
+            <Badge variant="secondary">{category.categoryName}</Badge>
+          )}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "note",

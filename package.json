@@ -31,6 +31,7 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.12",
+    "uuid": "^11.1.0",
     "valkoma-package": "^0.1.21",
     "yup": "^1.7.0"
   },

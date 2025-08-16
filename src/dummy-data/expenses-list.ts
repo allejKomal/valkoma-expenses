@@ -8,6 +8,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-01"),
     createdAt: new Date("2025-08-01T08:00:00"),
     updatedAt: new Date("2025-08-01T08:00:00"),
+    categoryId: "1",
   },
   {
     id: "2",
@@ -17,6 +18,7 @@ export const expensesList: Expense[] = [
     note: "Netflix",
     createdAt: new Date("2025-08-05T09:00:00"),
     updatedAt: new Date("2025-08-05T09:00:00"),
+    categoryId: "1",
     recurring: {
       frequency: "monthly",
       startDate: new Date("2025-08-05"),
@@ -31,6 +33,7 @@ export const expensesList: Expense[] = [
     attachments: ["receipt1.jpg"],
     createdAt: new Date("2025-08-10T10:00:00"),
     updatedAt: new Date("2025-08-10T10:00:00"),
+    categoryId: "3",
     recurring: {
       frequency: "monthly",
       startDate: new Date("2025-08-10"),
@@ -44,6 +47,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-11"),
     createdAt: new Date("2025-08-11T12:00:00"),
     updatedAt: new Date("2025-08-11T12:00:00"),
+    categoryId: "1",
   },
   {
     id: "5",
@@ -57,6 +61,7 @@ export const expensesList: Expense[] = [
       frequency: "monthly",
       startDate: new Date("2025-08-15"),
     },
+    categoryId: "3",
   },
   {
     id: "6",
@@ -65,6 +70,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-16"),
     createdAt: new Date("2025-08-16T17:00:00"),
     updatedAt: new Date("2025-08-16T17:00:00"),
+    categoryId: "1",
     recurring: {
       frequency: "weekly",
       startDate: new Date("2025-08-16"),
@@ -79,6 +85,7 @@ export const expensesList: Expense[] = [
     note: "Car insurance",
     createdAt: new Date("2025-01-01T09:00:00"),
     updatedAt: new Date("2025-01-01T09:00:00"),
+    categoryId: "2",
     recurring: {
       frequency: "yearly",
       startDate: new Date("2025-01-01"),
@@ -91,6 +98,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-07-20"),
     note: "Textbooks for course",
     attachments: ["receipt_books.jpg"],
+    categoryId: "4",
     createdAt: new Date("2025-07-20T14:00:00"),
     updatedAt: new Date("2025-07-20T14:00:00"),
   },
@@ -101,6 +109,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-01"),
     createdAt: new Date("2025-08-01T08:00:00"),
     updatedAt: new Date("2025-08-01T08:00:00"),
+    categoryId: "1",
     recurring: {
       frequency: "daily",
       startDate: new Date("2025-08-01"),
@@ -114,6 +123,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-03"),
     createdAt: new Date("2025-08-03T20:00:00"),
     updatedAt: new Date("2025-08-03T20:00:00"),
+    categoryId: "2",
   },
   {
     id: "11",
@@ -123,6 +133,7 @@ export const expensesList: Expense[] = [
     note: "Popcorn and tickets",
     createdAt: new Date("2025-08-07T19:00:00"),
     updatedAt: new Date("2025-08-07T19:00:00"),
+    categoryId: "4",
   },
   {
     id: "12",
@@ -132,6 +143,7 @@ export const expensesList: Expense[] = [
     attachments: ["dinner_receipt.pdf"],
     createdAt: new Date("2025-08-12T20:00:00"),
     updatedAt: new Date("2025-08-12T20:00:00"),
+    categoryId: "1",
   },
   {
     id: "13",
@@ -140,6 +152,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-14"),
     createdAt: new Date("2025-08-14T09:00:00"),
     updatedAt: new Date("2025-08-14T09:00:00"),
+    categoryId: "4",
   },
   {
     id: "14",
@@ -152,6 +165,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-10T10:00:00"),
     updatedAt: new Date("2025-08-10T10:00:00"),
+    categoryId: "3",
   },
   {
     id: "15",
@@ -160,6 +174,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-04"),
     createdAt: new Date("2025-08-04T08:00:00"),
     updatedAt: new Date("2025-08-04T08:00:00"),
+    categoryId: "2",
   },
   {
     id: "16",
@@ -170,6 +185,7 @@ export const expensesList: Expense[] = [
     attachments: ["gift_receipt.jpg"],
     createdAt: new Date("2025-08-13T15:00:00"),
     updatedAt: new Date("2025-08-13T15:00:00"),
+    categoryId: "4",
   },
   {
     id: "17",
@@ -178,6 +194,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-15"),
     createdAt: new Date("2025-08-15T10:00:00"),
     updatedAt: new Date("2025-08-15T10:00:00"),
+    categoryId: "1",
   },
   {
     id: "18",
@@ -187,6 +204,7 @@ export const expensesList: Expense[] = [
     note: "Oil change",
     createdAt: new Date("2025-08-17T14:00:00"),
     updatedAt: new Date("2025-08-17T14:00:00"),
+    categoryId: "2",
   },
   {
     id: "19",
@@ -200,6 +218,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-01T08:00:00"),
     updatedAt: new Date("2025-08-01T08:00:00"),
+    categoryId: "3",
   },
   {
     id: "20",
@@ -208,6 +227,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-02"),
     createdAt: new Date("2025-08-02T07:30:00"),
     updatedAt: new Date("2025-08-02T07:30:00"),
+    categoryId: "1",
   },
   {
     id: "21",
@@ -217,6 +237,7 @@ export const expensesList: Expense[] = [
     note: "Salon visit",
     createdAt: new Date("2025-08-05T13:00:00"),
     updatedAt: new Date("2025-08-05T13:00:00"),
+    categoryId: "5",
   },
   {
     id: "22",
@@ -226,6 +247,7 @@ export const expensesList: Expense[] = [
     attachments: ["snack_receipt.jpg"],
     createdAt: new Date("2025-08-06T15:00:00"),
     updatedAt: new Date("2025-08-06T15:00:00"),
+    categoryId: "1",
   },
   {
     id: "23",
@@ -235,6 +257,7 @@ export const expensesList: Expense[] = [
     note: "Dry cleaning",
     createdAt: new Date("2025-08-08T09:00:00"),
     updatedAt: new Date("2025-08-08T09:00:00"),
+    categoryId: "1",
   },
   {
     id: "24",
@@ -243,6 +266,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-09"),
     createdAt: new Date("2025-08-09T07:45:00"),
     updatedAt: new Date("2025-08-09T07:45:00"),
+    categoryId: "2",
   },
   {
     id: "25",
@@ -255,6 +279,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-01T10:00:00"),
     updatedAt: new Date("2025-08-01T10:00:00"),
+    categoryId: "3",
   },
   {
     id: "26",
@@ -268,6 +293,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-11T12:30:00"),
     updatedAt: new Date("2025-08-11T12:30:00"),
+    categoryId: "3",
   },
   {
     id: "27",
@@ -276,6 +302,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-12"),
     createdAt: new Date("2025-08-12T18:00:00"),
     updatedAt: new Date("2025-08-12T18:00:00"),
+    categoryId: "1",
   },
   {
     id: "28",
@@ -286,6 +313,7 @@ export const expensesList: Expense[] = [
     attachments: ["dinner_photo.png"],
     createdAt: new Date("2025-08-13T20:00:00"),
     updatedAt: new Date("2025-08-13T20:00:00"),
+    categoryId: "4",
   },
   {
     id: "29",
@@ -295,6 +323,7 @@ export const expensesList: Expense[] = [
     note: "Train tickets + food",
     createdAt: new Date("2025-08-14T10:00:00"),
     updatedAt: new Date("2025-08-14T10:00:00"),
+    categoryId: "4",
   },
   {
     id: "30",
@@ -303,6 +332,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-15"),
     createdAt: new Date("2025-08-15T08:00:00"),
     updatedAt: new Date("2025-08-15T08:00:00"),
+    categoryId: "5",
   },
   {
     id: "31",
@@ -312,6 +342,7 @@ export const expensesList: Expense[] = [
     note: "Late payment fee included",
     createdAt: new Date("2025-08-16T11:00:00"),
     updatedAt: new Date("2025-08-16T11:00:00"),
+    categoryId: "2",
   },
   {
     id: "32",
@@ -324,6 +355,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-02T17:00:00"),
     updatedAt: new Date("2025-08-02T17:00:00"),
+    categoryId: "3",
   },
   {
     id: "33",
@@ -332,6 +364,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-03"),
     createdAt: new Date("2025-08-03T16:00:00"),
     updatedAt: new Date("2025-08-03T16:00:00"),
+    categoryId: "2",
   },
   {
     id: "34",
@@ -341,6 +374,7 @@ export const expensesList: Expense[] = [
     note: "Drop-in session",
     createdAt: new Date("2025-08-06T07:30:00"),
     updatedAt: new Date("2025-08-06T07:30:00"),
+    categoryId: "1",
   },
   {
     id: "35",
@@ -353,6 +387,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-07T13:00:00"),
     updatedAt: new Date("2025-08-07T13:00:00"),
+    categoryId: "3",
   },
   {
     id: "36",
@@ -363,6 +398,7 @@ export const expensesList: Expense[] = [
     attachments: ["client_lunch.png"],
     createdAt: new Date("2025-08-08T13:30:00"),
     updatedAt: new Date("2025-08-08T13:30:00"),
+    categoryId: "1",
   },
   {
     id: "37",
@@ -371,6 +407,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-09"),
     createdAt: new Date("2025-08-09T10:00:00"),
     updatedAt: new Date("2025-08-09T10:00:00"),
+    categoryId: "2",
   },
   {
     id: "38",
@@ -384,6 +421,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-10T09:00:00"),
     updatedAt: new Date("2025-08-10T09:00:00"),
+    categoryId: "4",
   },
   {
     id: "39",
@@ -396,6 +434,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-12T02:00:00"),
     updatedAt: new Date("2025-08-12T02:00:00"),
+    categoryId: "3",
   },
   {
     id: "40",
@@ -405,6 +444,7 @@ export const expensesList: Expense[] = [
     attachments: ["notebook_invoice.pdf"],
     createdAt: new Date("2025-08-13T12:45:00"),
     updatedAt: new Date("2025-08-13T12:45:00"),
+    categoryId: "3",
   },
   {
     id: "41",
@@ -417,6 +457,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-01T09:00:00"),
     updatedAt: new Date("2025-08-01T09:00:00"),
+    categoryId: "3",
   },
   {
     id: "42",
@@ -425,6 +466,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-02"),
     createdAt: new Date("2025-08-02T12:30:00"),
     updatedAt: new Date("2025-08-02T12:30:00"),
+    categoryId: "1",
   },
   {
     id: "43",
@@ -434,6 +476,7 @@ export const expensesList: Expense[] = [
     attachments: ["receipt_office.pdf"],
     createdAt: new Date("2025-08-03T11:00:00"),
     updatedAt: new Date("2025-08-03T11:00:00"),
+    categoryId: "3",
   },
   {
     id: "44",
@@ -443,6 +486,7 @@ export const expensesList: Expense[] = [
     note: "Back pain",
     createdAt: new Date("2025-08-04T15:00:00"),
     updatedAt: new Date("2025-08-04T15:00:00"),
+    categoryId: "5",
   },
   {
     id: "45",
@@ -451,6 +495,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-05"),
     createdAt: new Date("2025-08-05T20:00:00"),
     updatedAt: new Date("2025-08-05T20:00:00"),
+    categoryId: "2",
   },
   {
     id: "46",
@@ -463,6 +508,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-06T10:00:00"),
     updatedAt: new Date("2025-08-06T10:00:00"),
+    categoryId: "5",
   },
   {
     id: "47",
@@ -471,6 +517,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-07"),
     createdAt: new Date("2025-08-07T09:30:00"),
     updatedAt: new Date("2025-08-07T09:30:00"),
+    categoryId: "2",
   },
   {
     id: "48",
@@ -483,6 +530,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-08T08:00:00"),
     updatedAt: new Date("2025-08-08T08:00:00"),
+    categoryId: "6",
   },
   {
     id: "49",
@@ -492,6 +540,7 @@ export const expensesList: Expense[] = [
     note: "Family fun",
     createdAt: new Date("2025-08-09T18:00:00"),
     updatedAt: new Date("2025-08-09T18:00:00"),
+    categoryId: "4",
   },
   {
     id: "50",
@@ -501,6 +550,7 @@ export const expensesList: Expense[] = [
     attachments: ["beans_invoice.jpg"],
     createdAt: new Date("2025-08-10T07:00:00"),
     updatedAt: new Date("2025-08-10T07:00:00"),
+    categoryId: "1",
   },
   {
     id: "51",
@@ -509,6 +559,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-11"),
     createdAt: new Date("2025-08-11T19:00:00"),
     updatedAt: new Date("2025-08-11T19:00:00"),
+    categoryId: "1",
   },
   {
     id: "52",
@@ -521,6 +572,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-12T08:00:00"),
     updatedAt: new Date("2025-08-12T08:00:00"),
+    categoryId: "3",
   },
   {
     id: "53",
@@ -529,6 +581,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-13"),
     createdAt: new Date("2025-08-13T14:00:00"),
     updatedAt: new Date("2025-08-13T14:00:00"),
+    categoryId: "1",
   },
   {
     id: "54",
@@ -539,6 +592,7 @@ export const expensesList: Expense[] = [
     attachments: ["vet_receipt.pdf"],
     createdAt: new Date("2025-08-14T09:00:00"),
     updatedAt: new Date("2025-08-14T09:00:00"),
+    categoryId: "5",
   },
   {
     id: "55",
@@ -552,6 +606,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-15T16:00:00"),
     updatedAt: new Date("2025-08-15T16:00:00"),
+    categoryId: "3",
   },
   {
     id: "56",
@@ -561,6 +616,7 @@ export const expensesList: Expense[] = [
     note: "Dinner and drinks",
     createdAt: new Date("2025-08-16T21:00:00"),
     updatedAt: new Date("2025-08-16T21:00:00"),
+    categoryId: "4",
   },
   {
     id: "57",
@@ -573,6 +629,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-17T10:00:00"),
     updatedAt: new Date("2025-08-17T10:00:00"),
+    categoryId: "3",
   },
   {
     id: "58",
@@ -582,6 +639,7 @@ export const expensesList: Expense[] = [
     attachments: ["gardening.pdf"],
     createdAt: new Date("2025-08-18T11:30:00"),
     updatedAt: new Date("2025-08-18T11:30:00"),
+    categoryId: "3",
   },
   {
     id: "59",
@@ -591,6 +649,7 @@ export const expensesList: Expense[] = [
     note: "General health check",
     createdAt: new Date("2025-08-19T09:00:00"),
     updatedAt: new Date("2025-08-19T09:00:00"),
+    categoryId: "5",
   },
   {
     id: "60",
@@ -603,6 +662,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-20T12:00:00"),
     updatedAt: new Date("2025-08-20T12:00:00"),
+    categoryId: "3",
   },
   {
     id: "61",
@@ -611,6 +671,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-21"),
     createdAt: new Date("2025-08-21T10:00:00"),
     updatedAt: new Date("2025-08-21T10:00:00"),
+    categoryId: "5",
   },
   {
     id: "62",
@@ -623,6 +684,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-22T08:00:00"),
     updatedAt: new Date("2025-08-22T08:00:00"),
+    categoryId: "3",
   },
   {
     id: "63",
@@ -632,6 +694,7 @@ export const expensesList: Expense[] = [
     note: "Team lunch outing",
     createdAt: new Date("2025-08-23T13:00:00"),
     updatedAt: new Date("2025-08-23T13:00:00"),
+    categoryId: "1",
   },
   {
     id: "64",
@@ -645,6 +708,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-24T09:00:00"),
     updatedAt: new Date("2025-08-24T09:00:00"),
+    categoryId: "3",
   },
   {
     id: "65",
@@ -653,6 +717,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-25"),
     createdAt: new Date("2025-08-25T19:00:00"),
     updatedAt: new Date("2025-08-25T19:00:00"),
+    categoryId: "2",
   },
   {
     id: "66",
@@ -663,6 +728,7 @@ export const expensesList: Expense[] = [
     attachments: ["conference_invoice.pdf"],
     createdAt: new Date("2025-08-26T11:00:00"),
     updatedAt: new Date("2025-08-26T11:00:00"),
+    categoryId: "3",
   },
   {
     id: "67",
@@ -671,6 +737,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-27"),
     createdAt: new Date("2025-08-27T15:00:00"),
     updatedAt: new Date("2025-08-27T15:00:00"),
+    categoryId: "4",
   },
   {
     id: "68",
@@ -679,6 +746,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-08-28"),
     createdAt: new Date("2025-08-28T16:00:00"),
     updatedAt: new Date("2025-08-28T16:00:00"),
+    categoryId: "1",
   },
   {
     id: "69",
@@ -688,6 +756,7 @@ export const expensesList: Expense[] = [
     attachments: ["cleaning_receipt.jpg"],
     createdAt: new Date("2025-08-29T13:30:00"),
     updatedAt: new Date("2025-08-29T13:30:00"),
+    categoryId: "1",
   },
   {
     id: "70",
@@ -697,6 +766,7 @@ export const expensesList: Expense[] = [
     note: "Celebration dinner",
     createdAt: new Date("2025-08-30T20:00:00"),
     updatedAt: new Date("2025-08-30T20:00:00"),
+    categoryId: "4",
   },
   {
     id: "71",
@@ -710,6 +780,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-08-31T17:30:00"),
     updatedAt: new Date("2025-08-31T17:30:00"),
+    categoryId: "1",
   },
   {
     id: "72",
@@ -722,6 +793,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-09-01T09:00:00"),
     updatedAt: new Date("2025-09-01T09:00:00"),
+    categoryId: "3",
   },
   {
     id: "73",
@@ -732,6 +804,7 @@ export const expensesList: Expense[] = [
     attachments: ["trip_receipt.pdf"],
     createdAt: new Date("2025-09-02T18:00:00"),
     updatedAt: new Date("2025-09-02T18:00:00"),
+    categoryId: "4",
   },
   {
     id: "74",
@@ -744,6 +817,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-09-03T08:00:00"),
     updatedAt: new Date("2025-09-03T08:00:00"),
+    categoryId: "2",
   },
   {
     id: "75",
@@ -752,6 +826,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-09-04"),
     createdAt: new Date("2025-09-04T10:30:00"),
     updatedAt: new Date("2025-09-04T10:30:00"),
+    categoryId: "2",
   },
   {
     id: "76",
@@ -762,6 +837,7 @@ export const expensesList: Expense[] = [
     attachments: ["cake_invoice.jpg"],
     createdAt: new Date("2025-09-05T17:00:00"),
     updatedAt: new Date("2025-09-05T17:00:00"),
+    categoryId: "1",
   },
   {
     id: "77",
@@ -775,6 +851,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-09-06T07:00:00"),
     updatedAt: new Date("2025-09-06T07:00:00"),
+    categoryId: "3",
   },
   {
     id: "78",
@@ -783,6 +860,7 @@ export const expensesList: Expense[] = [
     date: new Date("2025-09-07"),
     createdAt: new Date("2025-09-07T08:30:00"),
     updatedAt: new Date("2025-09-07T08:30:00"),
+    categoryId: "2",
   },
   {
     id: "79",
@@ -795,6 +873,7 @@ export const expensesList: Expense[] = [
     },
     createdAt: new Date("2025-09-08T08:00:00"),
     updatedAt: new Date("2025-09-08T08:00:00"),
+    categoryId: "3",
   },
   {
     id: "80",
@@ -804,5 +883,6 @@ export const expensesList: Expense[] = [
     attachments: ["book_receipt.jpg"],
     createdAt: new Date("2025-09-09T12:00:00"),
     updatedAt: new Date("2025-09-09T12:00:00"),
+    categoryId: "4",
   },
 ];

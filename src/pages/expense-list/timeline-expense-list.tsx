@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import type { Expense } from "@/models/expense.model";
 import AddExpense from "../../section/expense/add-expense";
 import DeleteExpense from "@/section/expense/delete-expense";
+import { categories } from "@/dummy-data/categories-list";
 
 export interface GroupedTimeline {
   [date: string]: {
@@ -74,9 +75,19 @@ export default function TimelineExpenseList({ data }: TimelineProps) {
                           {idx + 1}.
                         </div>
 
-                        <div className="font-medium text-left text-sm truncate">
+                        <div className="font-medium text-left text-sm truncate mr-2">
                           {event.title}
                         </div>
+                        <Badge variant="secondary">
+                          {
+                            categories.find(
+                              (c) =>
+                                c.id ===
+                                data.find((expense) => expense.id === event.id)
+                                  ?.categoryId
+                            )?.categoryName
+                          }
+                        </Badge>
                       </div>
 
                       {event.description && (
