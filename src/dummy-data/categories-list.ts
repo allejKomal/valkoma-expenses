@@ -5,7 +5,7 @@ export const categories: Category[] = [
     id: "1",
     categoryName: "Food",
     color: "#FF6384",
-    icon: "utensils",
+    icon: "UtensilsCrossed", // ✅ Exists in Lucide
     type: "expense",
     isDefault: true,
     createdAt: new Date(),
@@ -14,7 +14,7 @@ export const categories: Category[] = [
     id: "2",
     categoryName: "Transport",
     color: "#36A2EB",
-    icon: "car",
+    icon: "Car", // ✅ Correct casing
     type: "expense",
     isDefault: true,
     createdAt: new Date(),
@@ -23,7 +23,7 @@ export const categories: Category[] = [
     id: "3",
     categoryName: "Shopping",
     color: "#FFCE56",
-    icon: "shopping-bag",
+    icon: "ShoppingBag", // ✅
     type: "expense",
     isDefault: true,
     createdAt: new Date(),
@@ -32,7 +32,7 @@ export const categories: Category[] = [
     id: "4",
     categoryName: "Entertainment",
     color: "#4BC0C0",
-    icon: "film",
+    icon: "Film", // ✅
     type: "expense",
     isDefault: true,
     createdAt: new Date(),
@@ -41,7 +41,7 @@ export const categories: Category[] = [
     id: "5",
     categoryName: "Health",
     color: "#9966FF",
-    icon: "heartbeat",
+    icon: "HeartPulse", // ✅ closest to heartbeat
     type: "expense",
     isDefault: true,
     createdAt: new Date(),
@@ -50,7 +50,7 @@ export const categories: Category[] = [
     id: "6",
     categoryName: "Utilities",
     color: "#FF9F40",
-    icon: "bolt",
+    icon: "Bolt", // ✅
     type: "expense",
     isDefault: true,
     createdAt: new Date(),
@@ -59,7 +59,7 @@ export const categories: Category[] = [
     id: "7",
     categoryName: "Salary",
     color: "#00C49F",
-    icon: "money-bill-wave",
+    icon: "Wallet", // ✅ replacing money-bill-wave
     type: "income",
     isDefault: true,
     createdAt: new Date(),
@@ -68,7 +68,7 @@ export const categories: Category[] = [
     id: "8",
     categoryName: "Freelance",
     color: "#0088FE",
-    icon: "laptop-code",
+    icon: "Laptop", // ✅ closest to laptop-code
     type: "income",
     isDefault: true,
     createdAt: new Date(),
@@ -77,7 +77,7 @@ export const categories: Category[] = [
     id: "9",
     categoryName: "Gifts",
     color: "#FFBB28",
-    icon: "gift",
+    icon: "Gift", // ✅
     type: "income",
     isDefault: true,
     createdAt: new Date(),
@@ -86,7 +86,7 @@ export const categories: Category[] = [
     id: "10",
     categoryName: "Other",
     color: "#C0C0C0",
-    icon: "ellipsis-h",
+    icon: "MoreHorizontal", // ✅ replacing ellipsis-h
     type: "expense",
     isDefault: true,
     createdAt: new Date(),

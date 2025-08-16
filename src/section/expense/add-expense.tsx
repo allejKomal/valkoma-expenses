@@ -22,6 +22,7 @@ import {
 import { toast } from "sonner";
 import { PencilIcon } from "lucide-react";
 import { categories } from "@/dummy-data/categories-list";
+import { LucideIcons } from "@/utils/icons-list";
 
 interface AddExpenseProps {
   expenseToEdit?: Expense | null;
@@ -193,19 +194,26 @@ function AddExpense({ expenseToEdit, showIcon = false }: AddExpenseProps) {
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent className="max-h-[200px] overflow-y-auto">
-                    {categories.map((category) => (
-                      <SelectItem key={category.id} value={category.id}>
-                        {/* {category.icon && <Icon className="w-4 h-4" />} */}
-                        {category.categoryName}
-                      </SelectItem>
-                    ))}
+                    {categories.map((category) => {
+                      const Icon =
+                        LucideIcons[category.icon as keyof typeof LucideIcons];
+                      return (
+                        <SelectItem key={category.id} value={category.id}>
+                          <div className="flex items-center gap-2">
+                            {Icon && (
+                              <Icon className="w-4 h-4 text-muted-foreground" />
+                            )}
+                            {category.categoryName}
+                          </div>
+                        </SelectItem>
+                      );
+                    })}
                   </SelectContent>
                 </Select>
               )}
             />
           </FieldSet>
         </div>
-
         <div className="flex gap-2 w-full">
           <FieldSet
             label="Amount"

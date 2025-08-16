@@ -6,6 +6,7 @@ import AddExpense from "./add-expense";
 import DeleteExpense from "./delete-expense";
 import { formatter } from "@/utils/date";
 import { Badge } from "@/components/ui/badge";
+import { LucideIcons } from "@/utils/icons-list";
 
 export type ExtendedColumnDef<TData, TValue = unknown> = ColumnDef<
   TData,
@@ -69,11 +70,18 @@ export const expenseColumns: ExtendedColumnDef<Expense>[] = [
     cell: ({ row }) => {
       const categoryId = row.original.categoryId;
       const category = categories.find((c) => c.id === categoryId);
+
+      if (!category) return null;
+
+      const Icon =
+        LucideIcons[category.icon as keyof typeof LucideIcons] || null;
+
       return (
-        <div className="flex justify-center">
-          {category && (
-            <Badge variant="secondary">{category.categoryName}</Badge>
-          )}
+        <div className="flex items-center justify-center gap-1">
+          <Badge variant="secondary" className="flex items-center gap-1">
+            {Icon && <Icon className="w-4 h-4" />}
+            {category.categoryName}
+          </Badge>
         </div>
       );
     },
