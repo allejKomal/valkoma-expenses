@@ -18,8 +18,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "sonner";
+import { useState } from "react";
 
 function AddExpense() {
+  const [open, setOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -54,6 +57,7 @@ function AddExpense() {
   };
 
   const onSubmit = async (data: AddExpenseFormData) => {
+    setOpen(false);
     const expense: Omit<Expense, "id" | "createdAt" | "updatedAt"> = {
       expenseName: data.expenseName,
       amount: data.amount,
@@ -79,10 +83,13 @@ function AddExpense() {
     };
 
     console.log("Form submitted", expense);
+    toast.success("Expense added successfully");
   };
 
   return (
     <RightSideSheet
+      open={open}
+      onOpenChange={setOpen}
       triggerButtonText="Add Expense"
       title="Add Expense"
       submitButtonText="Add"

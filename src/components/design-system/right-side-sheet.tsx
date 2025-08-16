@@ -9,9 +9,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface RightSideSheetProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   triggerButtonText: string;
   title: string;
   description?: string;
@@ -30,6 +32,8 @@ interface RightSideSheetProps {
 }
 
 export const RightSideSheet: React.FC<RightSideSheetProps> = ({
+  open,
+  onOpenChange,
   triggerButtonText,
   triggerButtonVariant = "default",
   title,
@@ -40,8 +44,6 @@ export const RightSideSheet: React.FC<RightSideSheetProps> = ({
   onSubmit,
   onClose,
 }) => {
-  const [open, setOpen] = useState(false);
-
   useEffect(() => {
     if (open) {
       onClose?.();
@@ -50,7 +52,7 @@ export const RightSideSheet: React.FC<RightSideSheetProps> = ({
   }, [open]);
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
         <Button variant={triggerButtonVariant}>{triggerButtonText}</Button>
       </SheetTrigger>
@@ -64,7 +66,7 @@ export const RightSideSheet: React.FC<RightSideSheetProps> = ({
           <Button onClick={onSubmit} className="flex-1">
             {submitButtonText}
           </Button>
-          <SheetClose asChild onClick={() => setOpen(false)}>
+          <SheetClose asChild onClick={() => onOpenChange(false)}>
             <Button variant="outline" className="flex-1">
               {closeButtonText}
             </Button>
