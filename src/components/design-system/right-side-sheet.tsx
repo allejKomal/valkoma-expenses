@@ -1,0 +1,76 @@
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { useEffect, useState } from "react";
+
+interface RightSideSheetProps {
+  triggerButtonText: string;
+  title: string;
+  description?: string;
+  children: React.ReactNode;
+  triggerButtonVariant?:
+    | "default"
+    | "outline"
+    | "ghost"
+    | "secondary"
+    | "destructive"
+    | "link";
+  submitButtonText: string;
+  closeButtonText: string;
+  onSubmit?: () => void;
+  onClose?: () => void;
+}
+
+export const RightSideSheet: React.FC<RightSideSheetProps> = ({
+  triggerButtonText,
+  triggerButtonVariant = "default",
+  title,
+  description,
+  children,
+  submitButtonText,
+  closeButtonText,
+  onSubmit,
+  onClose,
+}) => {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      onClose?.();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  return (
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
+        <Button variant={triggerButtonVariant}>{triggerButtonText}</Button>
+      </SheetTrigger>
+      <SheetContent className="min-w-[500px]">
+        <SheetHeader>
+          <SheetTitle>{title}</SheetTitle>
+          {description && <SheetDescription>{description}</SheetDescription>}
+        </SheetHeader>
+        <div className="grid flex-1 auto-rows-min gap-6 px-4">{children}</div>
+        <SheetFooter className="flex-row">
+          <Button onClick={onSubmit} className="flex-1">
+            {submitButtonText}
+          </Button>
+          <SheetClose asChild onClick={() => setOpen(false)}>
+            <Button variant="outline" className="flex-1">
+              {closeButtonText}
+            </Button>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  );
+};
