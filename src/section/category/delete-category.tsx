@@ -10,35 +10,36 @@ import {
   AlertDialogContent,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import type { Expense } from "@/models/expense.model";
+import type { Category } from "@/models/category.model";
 import { useCreateOrUpdateFileMutation } from "@/redux/curd-api";
 import { TrashIcon } from "lucide-react";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
 
-interface DeleteExpenseProps {
-  expenseId: string;
+interface DeleteCategoryProps {
+  categoryId: string;
   showIcon?: boolean;
   variant?: "outline" | "destructive";
 }
 
-export default function DeleteExpense({
-  expenseId,
+export default function DeleteCategory({
+  categoryId,
   showIcon = false,
   variant = "outline",
-}: DeleteExpenseProps) {
-  const expenses = useSelector((state: any) => state.expenses.items)
+}: DeleteCategoryProps) {
+  const categories = useSelector((state: any) => state.categories.items)
   const [createOrUpdateFile] = useCreateOrUpdateFileMutation();
   const storedKey = localStorage.getItem("key");
-  const expUrl = useMemo(() => {
-    return storedKey ? `expenses/users/${storedKey}/expenses.json` : "expenses/expenses.json";
+  const catUrl = useMemo(() => {
+    return storedKey ? `expenses/users/${storedKey}/categories.json` : "expenses/categories.json";
   }, [storedKey]);
+
   const handleDelete = async () => {
-    console.log("Deleting expense", expenseId);
-    const typedExpenses = expenses as Expense[];
-    const filteredExpenses = typedExpenses.filter((exp) => exp.id !== expenseId)
-    await createOrUpdateFile({ path: expUrl, content: filteredExpenses })
+    console.log("Deleting expense", categoryId);
+    const typedExpenses = categories as Category[];
+    const filteredExpenses = typedExpenses.filter((exp) => exp.id !== categoryId)
+    await createOrUpdateFile({ path: catUrl, content: filteredExpenses })
     toast.success("Expense deleted successfully");
   };
 
@@ -53,8 +54,9 @@ export default function DeleteExpense({
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the
-            expense.
+            This action cannot be undone. It will permanently delete the category.
+
+            Note: You must reassign all expense categories related to this.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

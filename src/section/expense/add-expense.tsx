@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RightSideSheet } from "@/components/design-system/right-side-sheet";
@@ -23,6 +23,9 @@ import { toast } from "sonner";
 import { PencilIcon } from "lucide-react";
 import { categories } from "@/dummy-data/categories-list";
 import { LucideIcons } from "@/utils/icons-list";
+import { useSelector } from "react-redux";
+import { useCreateOrUpdateFileMutation } from "@/redux/curd-api";
+import { v4 as uuid } from "uuid";
 
 interface AddExpenseProps {
   expenseToEdit?: Expense | null;
@@ -30,7 +33,13 @@ interface AddExpenseProps {
 }
 
 function AddExpense({ expenseToEdit, showIcon = false }: AddExpenseProps) {
+  const expenses = useSelector((state: any) => state.expenses.items)
   const [open, setOpen] = useState(false);
+  const [createOrUpdateFile] = useCreateOrUpdateFileMutation();
+  const storedKey = localStorage.getItem("key");
+  const expUrl = useMemo(() => {
+    return storedKey ? `expenses/users/${storedKey}/expenses.json` : "expenses/expenses.json";
+  }, [storedKey]);
   const {
     register,
     handleSubmit,
@@ -58,7 +67,7 @@ function AddExpense({ expenseToEdit, showIcon = false }: AddExpenseProps) {
         attachments: undefined,
         isRecurring: !!expenseToEdit.recurring,
         categoryId: expenseToEdit.categoryId ?? "",
-        recurring: expenseToEdit.recurring
+        recurring: !!expenseToEdit.recurring
           ? {
             frequency: expenseToEdit.recurring.frequency,
             startDate: expenseToEdit.recurring.startDate
@@ -102,13 +111,15 @@ function AddExpense({ expenseToEdit, showIcon = false }: AddExpenseProps) {
   };
 
   const onSubmit = async (data: AddExpenseFormData) => {
-    setOpen(false);
-    const expense: Omit<Expense, "id" | "createdAt" | "updatedAt"> = {
+    const expense: Expense = {
+      id: uuid(),
       expenseName: data.expenseName,
       amount: data.amount,
       date: new Date(data.date),
       note: data.note ?? undefined,
       categoryId: data.categoryId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
       attachments: data.attachments
         ? await Promise.all(
           Array.from(data.attachments).map(async (file) => {
@@ -116,25 +127,30 @@ function AddExpense({ expenseToEdit, showIcon = false }: AddExpenseProps) {
           })
         )
         : undefined,
-      recurring:
-        data.isRecurring && data.recurring
-          ? {
-            frequency: data.recurring.frequency,
-            startDate: new Date(data.recurring.startDate),
-            endDate: data.recurring.endDate
-              ? new Date(data.recurring.endDate)
-              : undefined,
-          }
-          : undefined,
+      recurring: data.isRecurring && data.recurring
+        ? {
+          frequency: data.recurring.frequency ?? 'daily',
+          startDate: data.recurring.startDate ? new Date(data.recurring.startDate) : new Date(),
+          endDate: data.recurring.endDate ? new Date(data.recurring.endDate) : undefined,
+        }
+        : undefined
     };
-
     if (expenseToEdit) {
+      const typeExpenses = expenses as Expense[];
+      const filteredExpenses = typeExpenses.filter((exp) => exp.id !== expenseToEdit.id);
+      const combinedExpenses = [...filteredExpenses, expense]
       console.log("Editing expense", expenseToEdit.id, expense);
-      toast.success("Expense updated successfully");
-    } else {
+      await createOrUpdateFile({ path: 'expenses/expenses.json', content: combinedExpenses })
+      toast.success("Expense Updated successfully");
+    }
+    else {
       console.log("Adding new expense", expense);
+      const typeExpenses = expenses as Expense[];
+      const combinedExpenses = [...typeExpenses, expense]
+      await createOrUpdateFile({ path: expUrl, content: combinedExpenses })
       toast.success("Expense added successfully");
     }
+    setOpen(false);
   };
 
   return (
@@ -271,8 +287,8 @@ function AddExpense({ expenseToEdit, showIcon = false }: AddExpenseProps) {
                 render={({ field }) => (
                   <Select
                     onValueChange={field.onChange}
-                    value={field.value}
-                    defaultValue={field.value}
+                    value={field.value ?? undefined}
+                    defaultValue={field.value ?? undefined}
                   >
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select frequency" />

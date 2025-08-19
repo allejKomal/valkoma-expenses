@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { LucideIcons } from "@/utils/icons-list";
 import AddCategory from "@/section/category/add-category";
 import { formatter } from "@/utils/date";
+import DeleteCategory from "./delete-category";
 
 export type ExtendedColumnDef<TData, TValue = unknown> = ColumnDef<
   TData,
@@ -156,9 +157,9 @@ export const categoryColumns: ExtendedColumnDef<Category>[] = [
     cell: ({ row }) => (
       <div className="flex justify-center gap-2">
         <AddCategory categoryToEdit={row.original} showIcon />
-        {/* {!row.original.isDefault && (
+        {!row.original.isDefault && (
           <DeleteCategory categoryId={row.original.id} showIcon />
-        )} */}
+        )}
       </div>
     ),
     headerAlign: "center",

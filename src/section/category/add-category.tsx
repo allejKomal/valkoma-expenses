@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RightSideSheet } from "@/components/design-system/right-side-sheet";
@@ -22,13 +22,15 @@ import {
 } from "@/schema/add-category-schema";
 import { iconOptions, LucideIcons } from "@/utils/icons-list";
 import { cn } from "@/lib/utils";
-import { categories } from "@/dummy-data/categories-list";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "valkoma-package/primitive";
+import { useSelector } from "react-redux";
+import { v4 as uuid } from "uuid";
+import { useCreateOrUpdateFileMutation } from "@/redux/curd-api";
 
 interface AddCategoryProps {
   categoryToEdit?: Category | null;
@@ -36,8 +38,16 @@ interface AddCategoryProps {
 }
 
 function AddCategory({ categoryToEdit, showIcon = false }: AddCategoryProps) {
+  const categories: Category[] = useSelector((state: any) => state.categories.items)
   const [open, setOpen] = useState(false);
-
+  const storedKey = localStorage.getItem("key");
+  const catUrl = useMemo(() => {
+    return storedKey ? `expenses/users/${storedKey}/categories.json` : "expenses/categories.json";
+  }, [storedKey]);
+  const expUrl = useMemo(() => {
+    return storedKey ? `expenses/users/${storedKey}/expenses.json` : "expenses/expenses.json";
+  }, [storedKey]); 
+  const [createOrUpdateFile] = useCreateOrUpdateFileMutation();
   const {
     register,
     handleSubmit,
@@ -50,7 +60,6 @@ function AddCategory({ categoryToEdit, showIcon = false }: AddCategoryProps) {
     resolver: yupResolver(CategorySchema),
   });
 
-  // --- ✨ Reset with Edit Data ---
   useEffect(() => {
     if (categoryToEdit && open) {
       reset({
@@ -63,31 +72,38 @@ function AddCategory({ categoryToEdit, showIcon = false }: AddCategoryProps) {
     }
   }, [categoryToEdit, open, reset]);
 
-  // --- ✨ Reset to Empty When Closed ---
   useEffect(() => {
     if (!open) {
       reset(initialCategoryFormValues);
     }
   }, [open, reset]);
 
-  // --- ✅ Form Submit Logic ---
   const onSubmit = async (data: CategoryFormData) => {
-    setOpen(false);
-    const category: Omit<Category, "id" | "createdAt"> = {
+    const category: Category = {
       categoryName: data.categoryName,
       color: data.color,
       icon: data.icon,
       type: data.type,
       isDefault: data.isDefault,
+      createdAt: new Date(),
+      id: uuid()
     };
 
     if (categoryToEdit) {
       console.log("Editing category", categoryToEdit.id, category);
+      const typedCategories = categories as Category[];
+      const filteredCategories = typedCategories.filter((cat) => cat.id !== categoryToEdit.id)
+      const combinedCategories = [...filteredCategories, category]
+      await createOrUpdateFile({ path: catUrl, content: combinedCategories })
       toast.success("Category updated successfully");
     } else {
       console.log("Adding new category", category);
+      const typedCategories = categories as Category[];
+      const combinedCategories = [...typedCategories, category]
+      await createOrUpdateFile({ path: expUrl, content: combinedCategories })
       toast.success("Category added successfully");
     }
+    setOpen(false);
   };
 
   return (

@@ -40,7 +40,7 @@ export const expenseColumns: ExtendedColumnDef<Expense>[] = [
     cell: ({ getValue }) => (
       <div className="w-full flex justify-center">
         <span className="text-right font-mono">
-          ${getValue<number>().toFixed(2)}
+          ${getValue<number>()}
         </span>
       </div>
     ),
@@ -56,8 +56,7 @@ export const expenseColumns: ExtendedColumnDef<Expense>[] = [
     cell: ({ getValue }) => {
       const date = new Date(getValue<Date>());
       return (< div className="w-full flex justify-center" >
-        <span>          {formatter.format(date)}
-        </span>
+        <span>{formatter.format(date)}</span>
       </div >
       )
     },
