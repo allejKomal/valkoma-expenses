@@ -51,22 +51,23 @@ function AddExpense({ expenseToEdit, showIcon = false }: AddExpenseProps) {
         expenseName: expenseToEdit.expenseName ?? "",
         amount: expenseToEdit.amount ?? 0,
         date: expenseToEdit.date
-          ? expenseToEdit.date.toISOString().split("T")[0]
+          ? new Date(expenseToEdit.date).toISOString().split("T")[0]
           : "",
+
         note: expenseToEdit.note ?? "",
         attachments: undefined,
         isRecurring: !!expenseToEdit.recurring,
         categoryId: expenseToEdit.categoryId ?? "",
         recurring: expenseToEdit.recurring
           ? {
-              frequency: expenseToEdit.recurring.frequency,
-              startDate: expenseToEdit.recurring.startDate
-                ? expenseToEdit.recurring.startDate.toISOString().split("T")[0]
-                : "",
-              endDate: expenseToEdit.recurring.endDate
-                ? expenseToEdit.recurring.endDate.toISOString().split("T")[0]
-                : "",
-            }
+            frequency: expenseToEdit.recurring.frequency,
+            startDate: expenseToEdit.recurring.startDate
+              ? expenseToEdit.recurring.startDate.toISOString().split("T")[0]
+              : "",
+            endDate: expenseToEdit.recurring.endDate
+              ? expenseToEdit.recurring.endDate.toISOString().split("T")[0]
+              : "",
+          }
           : undefined,
       });
     }
@@ -110,20 +111,20 @@ function AddExpense({ expenseToEdit, showIcon = false }: AddExpenseProps) {
       categoryId: data.categoryId,
       attachments: data.attachments
         ? await Promise.all(
-            Array.from(data.attachments).map(async (file) => {
-              return await fileToBase64(file);
-            })
-          )
+          Array.from(data.attachments).map(async (file) => {
+            return await fileToBase64(file);
+          })
+        )
         : undefined,
       recurring:
         data.isRecurring && data.recurring
           ? {
-              frequency: data.recurring.frequency,
-              startDate: new Date(data.recurring.startDate),
-              endDate: data.recurring.endDate
-                ? new Date(data.recurring.endDate)
-                : undefined,
-            }
+            frequency: data.recurring.frequency,
+            startDate: new Date(data.recurring.startDate),
+            endDate: data.recurring.endDate
+              ? new Date(data.recurring.endDate)
+              : undefined,
+          }
           : undefined,
     };
 

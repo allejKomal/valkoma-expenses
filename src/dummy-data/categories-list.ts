@@ -5,7 +5,7 @@ export const categories: Category[] = [
     id: "1",
     categoryName: "Food",
     color: "#FF6384",
-    icon: "UtensilsCrossed", // ✅ Exists in Lucide
+    icon: "UtensilsCrossed", 
     type: "expense",
     isDefault: true,
     createdAt: new Date(),
@@ -14,7 +14,7 @@ export const categories: Category[] = [
     id: "2",
     categoryName: "Transport",
     color: "#36A2EB",
-    icon: "Car", // ✅ Correct casing
+    icon: "Car", 
     type: "expense",
     isDefault: true,
     createdAt: new Date(),

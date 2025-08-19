@@ -7,5 +7,6 @@ interface CategoryTableProps {
 }
 
 export function CategoryTable({ data }: CategoryTableProps) {
+  console.log(data);
   return <DataTable data={data} columns={categoryColumns} />;
 }

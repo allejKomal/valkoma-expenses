@@ -1,4 +1,3 @@
-import { expensesList } from "@/dummy-data/expenses-list";
 import { ButtonGroup } from "valkoma-package/design-system";
 import { useState } from "react";
 import { GridIcon, TimerIcon, Table2Icon, Coins } from "lucide-react";
@@ -9,10 +8,13 @@ import ExpenseCards from "../section/expense/expense-cards";
 import TimelineExpenseList from "../section/expense/timeline-expense-list";
 import Navbar from "@/components/design-system/nav-bar";
 import AddCategory from "@/section/category/add-category";
+import { useSelector } from "react-redux";
 
 type view = "table" | "cards" | "timeline";
 
 export default function ExpenseList() {
+  const expenses = useSelector((state: any) => state.expenses.items)
+
   const [activeView, setActiveView] = useState<view>("table");
 
   const viewOptions = [
@@ -23,6 +25,8 @@ export default function ExpenseList() {
       icon: <TimerIcon className="w-4 h-4" />,
     },
   ];
+
+  console.log(expenses);
 
   return (
     <div className="w-full flex flex-col gap-4  h-full">
@@ -47,10 +51,10 @@ export default function ExpenseList() {
         </div>
       </Navbar>
       <div className="p-4 h-full overflow-y-auto">
-        {activeView === "table" && <ExpenseTable data={expensesList} />}
-        {activeView === "cards" && <ExpenseCards data={expensesList} />}
+        {activeView === "table" && <ExpenseTable data={expenses} />}
+        {activeView === "cards" && <ExpenseCards data={expenses} />}
         {activeView === "timeline" && (
-          <TimelineExpenseList data={expensesList} />
+          <TimelineExpenseList data={expenses} />
         )}
       </div>
     </div>

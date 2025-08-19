@@ -35,7 +35,9 @@ export default function ExpenseCards({ data }: ExpenseCardsProps) {
 
           {/* Content below the image (like date) */}
           <div className="pt-2 px-2 flex gap-2 justify-end flex-wrap">
-            <Badge variant="outline">{formatter.format(expense.date)}</Badge>
+            <Badge variant="outline">
+              {formatter.format(new Date(expense.date))}
+            </Badge>
             {expense.note && <Badge variant="outline">{expense.note}</Badge>}
             <Badge variant="secondary">
               {

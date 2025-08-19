@@ -53,11 +53,14 @@ export const expenseColumns: ExtendedColumnDef<Expense>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Date" />
     ),
-    cell: ({ getValue }) => (
-      <div className="w-full flex justify-center">
-        <span>{formatter.format(getValue<Date>())}</span>
-      </div>
-    ),
+    cell: ({ getValue }) => {
+      const date = new Date(getValue<Date>());
+      return (< div className="w-full flex justify-center" >
+        <span>          {formatter.format(date)}
+        </span>
+      </div >
+      )
+    },
     enableSorting: false,
     headerAlign: "center",
     size: 120,

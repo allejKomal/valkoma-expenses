@@ -30,11 +30,13 @@ const Header: React.FC = () => {
               <NavigationMenuList>
                 {links.map((item) => (
                   <NavigationMenuItem key={item.label}>
-                    <NavigationMenuLink
-                      href={item.to}
-                      className="bg-background hover:bg-muted hover:text-accent-foreground group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors"
-                    >
-                      {item.label}
+                    <NavigationMenuLink asChild>
+                      <Link
+                        to={item.to}
+                        className="bg-background hover:bg-muted hover:text-accent-foreground group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {item.label}
+                      </Link>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 ))}

@@ -26,7 +26,8 @@ export default function TimelineExpenseList({ data }: TimelineProps) {
     });
 
     return expenses.reduce((acc: GroupedTimeline, expense) => {
-      const dateKey = formatter.format(expense.date);
+      const dateKey = formatter.format(new Date(expense.date));
+
 
       const expenseEntry = {
         id: expense.id,
