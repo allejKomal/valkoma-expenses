@@ -61,7 +61,7 @@ export const expenseColumns: ExtendedColumnDef<Expense>[] = [
       if (isNaN(date.getTime())) {
         return (
           <div className="w-full flex justify-center">
-            <span>Invalid Date: {rawDate.toString()}</span>
+            <span>Invalid Date:</span>
           </div>
         );
       }
