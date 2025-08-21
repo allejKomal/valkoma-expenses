@@ -54,11 +54,23 @@ export const expenseColumns: ExtendedColumnDef<Expense>[] = [
       <DataTableColumnHeader column={column} title="Date" />
     ),
     cell: ({ getValue }) => {
-      const date = new Date(getValue<Date>());
-      return (< div className="w-full flex justify-center" >
-        <span>{formatter.format(date)}</span>
-      </div >
-      )
+      const rawDate = getValue<Date>(); // Get the value from getValue()
+
+      // Validate the date
+      const date = new Date(rawDate);
+      if (isNaN(date.getTime())) {
+        return (
+          <div className="w-full flex justify-center">
+            <span>Invalid Date: {rawDate.toString()}</span>
+          </div>
+        );
+      }
+
+      return (
+        <div className="w-full flex justify-center">
+          <span>{formatter.format(date)}</span>
+        </div>
+      );
     },
     enableSorting: false,
     headerAlign: "center",
